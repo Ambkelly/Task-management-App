@@ -367,14 +367,14 @@ input:focus {
   border-radius: 20px;
   background-color: #FCFBFF;
   width:25%;
-  height: inherit;
-  
+  height: fit-content;
+  margin-top: 20px;
    /* padding: 20px; */
    
  }
 .current_task{
   width: 85%;
-  height: 581px;
+  height: fit-content;
   margin: 0 auto;
   background-color: #F5F2FF;
   border-radius: 20px;
