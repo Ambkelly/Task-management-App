@@ -1,0 +1,208 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 2rem;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Login Form */
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Headings & Paragraphs */
+.login-form h1 {
+    font-size: clamp(20px, 2vw, 24px);
+    margin-bottom: 10px;
+    text-align: center; 
+}
+
+.login-form p {
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: #555;
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+/* Input Fields */
+.input-field {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-field label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: start;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    display: block;
+    text-align: end;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+/* Sign-in Button */
+.sign-in {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+/* Divider */
+.divider {
+    margin: 15px 0;
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: #777;
+}
+
+/* Social Buttons */
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.social-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    justify-content: center;
+    flex: 1;
+    padding: 15px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #F3F9FA;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.social-buttons img{
+    width: 30px;
+}
+/* Sign-up Link */
+.sign-up {
+    text-align: center !important;
+    margin-top: 25px;
+    font-size: clamp(12px, 1.5vw, 14px);
+}
+
+.sign-up a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+/* Login Art (Image Section) */
+.login-art {
+    max-width: 500px;
+    width: 100%;
+}
+
+.login-art img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+}
+/* Password Container */
+.password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-container input {
+    flex: 1;
+    padding-right: 60px; /* Space for the button */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+
+    /* Social Buttons */
+    .social-buttons {
+        flex-direction: row; /* Change to row for horizontal layout */
+        justify-content: space-between;
+    }
+    .social-buttons button{
+        width: calc(50% - 5px); /* Adjusted width */
+        
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column-reverse;
+        text-align: center;
+        height: auto;
+        padding: 40px 20px;
+    }
+    
+    .login-art img {
+        width: 100%;
+        height: 300px; /* Set height to 300px */
+        border-radius: 20px;
+        object-fit: cover;
+    }
+
+    .login-form {
+        max-width: 100%;
+    }
+
+    .input-field {
+        text-align: center;
+    }
+
+    .forgot-password {
+        text-align: center;
+    }
+
+    .login-art {
+        max-width: 100%;
+    }
+}
