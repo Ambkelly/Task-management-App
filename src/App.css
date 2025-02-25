@@ -15,15 +15,15 @@ ul,li, ol{
 .General_container{
   display: flex;
   flex-wrap: wrap;
-  height: 982px;
+  height: fit-content;
   width: 100%;
   background-color: #F3F5F9;
 }
 .aside_container{
   border-radius: 20px;
   width: 10%;
-  height: 982px;
-  background-color: #FCFBFF;
+  height: 950px;
+  background-color: #FCFBFF !important;
   position: relative;
   text-align: center;
 }
@@ -96,6 +96,7 @@ input:focus {
 .today_task_container{
   width: 100%;
   height: 214px;
+  border: 1px solid #D9D9D9;
   margin-top: 30px;
   background-color: #FCFBFF;
   border-radius: 20px;
@@ -107,16 +108,19 @@ input:focus {
 }
 .today_task_content{
   padding-left: 30px;
+  
 }
 .today_task_content h1{
   font-family:Popins;
   font-size: 40px;
+  padding-bottom: 10px;
 }
 .today_task_content p{
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: lighter;
   color: #27104E;
+  padding-bottom: 20px;
 }
 .today_task_content button{
   width: 180px;
@@ -125,6 +129,8 @@ input:focus {
   background-color: #9854CB;
   border: none;
   color: #FCFBFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 
 }
 .today_task_img{
@@ -153,7 +159,8 @@ input:focus {
 .title{
   color: #D9D9D9;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 16px!important;
+  padding: 10px 0;
 }
 .columns h3{
   font-family: popins;
@@ -164,6 +171,7 @@ input:focus {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   margin-left: 20px;
+  padding: 15px 0;
 }
 .outter_progress{
   background-color: #D9D9D9;
@@ -198,6 +206,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 0 !important;
 }
  .Image_span{
   /* display: flex; */
@@ -358,10 +367,6 @@ input:focus {
   flex: 1;
 }
 
-
-
-
-
 /* Right aside container */
 .Right_aside_container{
   border-radius: 20px;
@@ -369,7 +374,7 @@ input:focus {
   width:25%;
   height: fit-content;
   margin-top: 20px;
-   /* padding: 20px; */
+  padding: 20px;
    
  }
 .current_task{
@@ -392,15 +397,17 @@ input:focus {
 }
 .current_task h3{
   font-family: Arial, Helvetica, 
-  sans-serif;
+  sans-serif !important;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 16px !important;
   font-weight: bold;
   margin-bottom: 0;
 }
 .current_task p{
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 16px ;
+  padding-bottom: 20px;
+  padding-top: 5px;
 }
 .divider{
   display: flex;
@@ -411,6 +418,7 @@ input:focus {
 .divider button{
   width: 90%;
   border: 0.2px solid #D9D9D9;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .Add_task{
  display: flex;
@@ -423,13 +431,13 @@ input:focus {
 }
 .Add_task h3{ 
   color: #27104E;
-  font-family: Popins;
-  font-size: 18px;
+  font-family: Popins !important;
+  font-size: 20px !important;
   text-align: center;
 }
 .Add_task p{
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   padding-top: 10px;
 }
@@ -441,24 +449,15 @@ input:focus {
   color: #FCFBFF;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
+  margin: 20px 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.calender{
+  margin-top: 100px;
+  padding-bottom: 20px;
+}
+.calender img{
+  width: 100%;
+}
 @media (max-width: 1024px) {
   .aside_container {
       display: none;
@@ -474,6 +473,10 @@ input:focus {
   }
   .current_task{
     width: 95%;
+  }
+  .calender{
+    margin-top: 30px;
+    padding-bottom: 20px;
   }
 }
 @media (max-width: 768px){
@@ -534,5 +537,9 @@ input:focus {
   }
   .current_task{
     height: fit-content;
+  }
+  .calender{
+    margin-top: 20px;
+    padding-bottom: 10px;
   }
 }

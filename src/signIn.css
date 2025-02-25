@@ -1,13 +1,16 @@
-/* Global Styles */
+Global Styles
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.main_containers{
+    background-color: #F3F5F9;
+    width: 100%;
+}
 /* Main Container */
-.container {
+.box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,22 +29,27 @@
 
 /* Headings & Paragraphs */
 .login-form h1 {
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: 28px;
     margin-bottom: 10px;
+    margin-top: 20 0px;
     text-align: center; 
+    font-family: Popins;
 }
 
 .login-form p {
-    font-size: clamp(12px, 1.5vw, 14px);
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
     color: #555;
     margin-bottom: 20px;
-    text-align: start;
+    text-align: center;
+
 }
 
 /* Input Fields */
 .input-field {
     margin-bottom: 15px;
     text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .input-field label {
@@ -49,6 +57,7 @@
     font-size: 14px;
     margin-bottom: 5px;
     text-align: start;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .input-field input {
@@ -57,6 +66,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: clamp(14px, 1.5vw, 16px);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Forgot Password Link */
@@ -66,6 +76,7 @@
     font-size: 12px;
     margin-top: 5px;
     color: #007BFF;
+    font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
 }
 
@@ -73,20 +84,23 @@
 .sign-in {
     width: 100%;
     padding: 10px;
-    background: #000;
+    background: #9854CB;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
     font-size: clamp(14px, 1.5vw, 16px);
 }
 
 /* Divider */
-.divider {
+.dividers {
     margin: 15px 0;
-    font-size: clamp(12px, 1.5vw, 14px);
-    color: #777;
+    font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+    color: #FCA465;
 }
 
 /* Social Buttons */
@@ -107,7 +121,7 @@
     border: 0;
     border-radius: 5px;
     cursor: pointer;
-    background: #F3F9FA;
+    background: #FCFBFF;
     font-size: clamp(14px, 1.5vw, 16px);
 }
 
@@ -119,40 +133,33 @@
     text-align: center !important;
     margin-top: 25px;
     font-size: clamp(12px, 1.5vw, 14px);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sign-up a {
     color: #007BFF;
     text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Login Art (Image Section) */
-.login-art {
-    max-width: 500px;
-    width: 100%;
-}
-
-.login-art img {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    object-fit: cover;
-}
 /* Password Container */
 .password-container {
     display: flex;
     align-items: center;
     position: relative;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .password-container input {
     flex: 1;
     padding-right: 60px; /* Space for the button */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .toggle-password {
     position: absolute;
     right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
     background: transparent;
     border: none;
     color: #007BFF;
@@ -202,7 +209,7 @@
         text-align: center;
     }
 
-    .login-art {
-        max-width: 100%;
-    }
+    /* .login-art {
+        max-width: 100%; 
+    } */
 }
