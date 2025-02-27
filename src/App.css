@@ -22,7 +22,7 @@ ul,li, ol{
 .aside_container{
   border-radius: 20px;
   width: 10%;
-  height: 950px;
+  height: 930px;
   background-color: #FCFBFF !important;
   position: relative;
   text-align: center;
@@ -62,7 +62,7 @@ ul{
 }
 .main_container{
   width: 60%;
-  height: 100%;
+  height: fit-content;
   position: relative;
   background-color: #F3F5F9;
   margin: 0 auto;
@@ -283,9 +283,9 @@ input:focus {
   justify-content: space-between;
 }
 .main_graph_section{
-  border: 1px solid red;
-  height: 288px;
+  height: fit-content;
   width: 55%;
+  border: 1px solid #D9D9D9;
 }
 .task{
   width: 43%;
@@ -543,3 +543,15 @@ input:focus {
     padding-bottom: 10px;
   }
 }
+
+.notification_container{
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+  background-color: #FCFBFF;
+}
+.notification_container{display: none;}

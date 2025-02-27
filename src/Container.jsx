@@ -1,8 +1,42 @@
+import { Line } from "react-chartjs-2";
 import { useState } from "react";
+import { Chart as ChartJs, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+
+// Register Chart.js components
+ChartJs.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+// Define lineChartData
+const lineChartData = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"], // X-axis labels
+  datasets: [
+    {
+      label: "My First dataset", // Label for the dataset
+      data: [65, 59, 80, 81, 56, 55, 40], // Y-axis data
+      fill: false,
+      borderColor: "rgb(75, 192, 192)", // Line color
+      tension: 0.1, // Smoothness of the line
+    },
+  ],
+};
+
+// Define chart options
+const options = {
+  responsive: true, // Make the chart responsive
+  plugins: {
+    legend: {
+      position: "top", // Position of the legend
+    },
+    title: {
+      display: true,
+      text: "Monthly Progress", // Chart title
+    },
+  },
+};
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [notification, setNotification] = useState();
 
   function handleInputChange(e) {
     setNewTask(e.target.value);
@@ -36,11 +70,18 @@ const Home = () => {
     }
   }
 
+  const handleNotification = () => {
+    setNotification("You have a new notification");
+    setTimeout(() => {
+      setNotification("");
+    }, 2000);
+  };
+
   return (
     <div className="General_container">
       <aside className="aside_container">
         <ul>
-          <li className="first_img"><img src="./first.png" alt="First" /></li>
+          <button className="first_img" onClick={handleNotification}><img src="./first.png" alt="First" /></button>
           <li className="second_img"><img src="./second.png" alt="Second" /></li>
           <li className="third_img"><img src="./third.png" alt="Third" /></li>
           <li className="fouth_img"><img src="./fouth.png" alt="Fourth" /></li>
@@ -49,13 +90,15 @@ const Home = () => {
         </ul>
       </aside>
       <main className="main_container">
+        <div className="notification_container">
+          {notification && <div className="notification">{notification}</div>}
+        </div>
         <div className="Search_btn">
           <div className="search_wrap">
             <input type="text" placeholder="Search" />
             <img src="search.png" alt="Search button" className="search_btn" />
           </div>
         </div>
-        {/* First Row */}
         <div className="today_task_container">
           <div className="today_task_content">
             <h1>Today Task</h1>
@@ -66,7 +109,6 @@ const Home = () => {
             <img src="Time management-amico 1.png" alt="Time management image" />
           </div>
         </div>
-        {/* Second Row */}
         <div className="Second_row">
           <div className="columns first_col">
             <p className="title">Nov 2, 2022</p>
@@ -129,10 +171,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-
         <div className="Last_section">
           {/* Graph section */}
-          <div className="main_graph_section"></div>
+          <div className="main_graph_section">
+            <Line options={options} data={lineChartData} className="line" />
+          </div>
           {/* Task section */}
           <div className="task">
             <h1>Current Tasks</h1>
@@ -160,7 +203,6 @@ const Home = () => {
       </main>
       <div className="Right_aside_container">
         <div className="current_task">
-          {/* First row */}
           <div className="profile">
             <span>
               <img src="Group 21 2.png" alt="Profile_icon" />
@@ -173,7 +215,6 @@ const Home = () => {
           <div className="divider">
             <button className="divider"></button>
           </div>
-          {/* Second Row */}
           <div className="Add_task">
             <img src="Design community-pana 1.png" alt="Design community image" />
             <h3>Your Task</h3>
