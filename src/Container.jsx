@@ -141,9 +141,8 @@ const Home = () => {
 
   // Handle notification
   const handleNotification = () => {
-    setNotification("lorem");
-    console.log("Clicked");
-    
+    setNotification(alert("This feature is still being worked on. Stay tuned!"));
+
     setTimeout(() => {
       setNotification(""); // Clear notification after 2 seconds
     }, 2000);
@@ -194,16 +193,28 @@ const Home = () => {
           <button className="first_img" onClick={handleNotification}>
             <img src="./first.png" alt="First" />
           </button>
-          <li className="second_img"><img src="./second.png" alt="Second" /></li>
-          <li className="third_img"><img src="./third.png" alt="Third" /></li>
-          <li className="fouth_img"><img src="./fouth.png" alt="Fourth" /></li>
-          <li className="sixth_img"><img src="./sixth.png" alt="Sixth" /></li>
-          <li className="seventh_img"><img src="./seventh.png" alt="Seventh" /></li>
+          <button className="second_img" onClick={handleNotification}>
+            <img src="./second.png" alt="Second" />
+          </button>
+          <button className="third_img" onClick={handleNotification}>
+            <img src="./third.png" alt="Third" />
+          </button>
+          <button className="fouth_img" onClick={handleNotification}>
+            <img src="./fouth.png" alt="Fourth" />
+          </button>
+          <button className="sixth_img" onClick={handleNotification}>
+            <img src="./sixth.png" alt="Sixth" />
+          </button>
+          <button className="seventh_img" onClick={handleNotification}>
+            <img src="./seventh.png" alt="Seventh" />
+          </button>
         </ul>
       </aside>
       <main className="main_container">
+        {/* Notification  */}
         <div className="notification_container">
-          {notification && <div className="notification">{notification}</div>}
+          <p>{notification}</p>
+          {notification && <div className="notification"></div>}
         </div>
         <div className="Search_btn">
           <div className="search_wrap">
