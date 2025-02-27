@@ -5,13 +5,13 @@ import { Chart as ChartJs, CategoryScale, LinearScale, PointElement, LineElement
 // Register Chart.js components
 ChartJs.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// Define lineChartData
-const lineChartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"], // X-axis labels
+// Define initial lineChartData
+const initialLineChartData = {
+  labels: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7"], // X-axis labels (tasks)
   datasets: [
     {
-      label: "My First dataset", // Label for the dataset
-      data: [65, 59, 80, 81, 56, 55, 40], // Y-axis data
+      label: "Task Progress", // Label for the dataset
+      data: [90, 33, 75, 0, 0, 0, 0], // Initial progress values (Y-axis data)
       fill: false,
       borderColor: "rgb(75, 192, 192)", // Line color
       tension: 0.1, // Smoothness of the line
@@ -28,7 +28,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "Monthly Progress", // Chart title
+      text: "Task Progress", // Chart title
     },
   },
 };
@@ -36,45 +36,131 @@ const options = {
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const [notification, setNotification] = useState();
+  const [notification, setNotification] = useState("");
+  const [progress, setProgress] = useState([90, 33, 75, 0, 0, 0, 0]); // Initial progress values for each task
+  const [lineChartData, setLineChartData] = useState(initialLineChartData);
 
+  // Handle input change for new task
   function handleInputChange(e) {
     setNewTask(e.target.value);
   }
 
+  // Add a new task
   function addTask() {
     if (newTask.trim() !== "") {
       setTasks((t) => [...t, newTask]);
+      setProgress((p) => [...p, 0]); // Initialize progress for the new task
       setNewTask("");
+
+      // Update the graph data
+      const updatedLineChartData = {
+        ...lineChartData,
+        labels: [...lineChartData.labels, `Task ${tasks.length + 1}`], // Add a new label
+        datasets: [
+          {
+            ...lineChartData.datasets[0],
+            data: [...lineChartData.datasets[0].data, 0], // Add a new progress value
+          },
+        ],
+      };
+      setLineChartData(updatedLineChartData);
     }
   }
 
+  // Delete a task
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
+    const updatedProgress = progress.filter((_, i) => i !== index);
     setTasks(updatedTasks);
+    setProgress(updatedProgress);
+
+    // Update the graph data
+    const updatedLineChartData = {
+      ...lineChartData,
+      labels: lineChartData.labels.filter((_, i) => i !== index), // Remove the corresponding label
+      datasets: [
+        {
+          ...lineChartData.datasets[0],
+          data: updatedProgress, // Update the progress data
+        },
+      ],
+    };
+    setLineChartData(updatedLineChartData);
   }
 
+  // Move a task up
   function moveTaskUp(index) {
     if (index > 0) {
       const updatedTasks = [...tasks];
+      const updatedProgress = [...progress];
       [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
+      [updatedProgress[index], updatedProgress[index - 1]] = [updatedProgress[index - 1], updatedProgress[index]];
       setTasks(updatedTasks);
+      setProgress(updatedProgress);
+
+      // Update the graph data
+      const updatedLineChartData = {
+        ...lineChartData,
+        datasets: [
+          {
+            ...lineChartData.datasets[0],
+            data: updatedProgress, // Update the progress data
+          },
+        ],
+      };
+      setLineChartData(updatedLineChartData);
     }
   }
 
+  // Move a task down
   function moveTaskDown(index) {
     if (index < tasks.length - 1) {
       const updatedTasks = [...tasks];
+      const updatedProgress = [...progress];
       [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
+      [updatedProgress[index], updatedProgress[index + 1]] = [updatedProgress[index + 1], updatedProgress[index]];
       setTasks(updatedTasks);
+      setProgress(updatedProgress);
+
+      // Update the graph data
+      const updatedLineChartData = {
+        ...lineChartData,
+        datasets: [
+          {
+            ...lineChartData.datasets[0],
+            data: updatedProgress, // Update the progress data
+          },
+        ],
+      };
+      setLineChartData(updatedLineChartData);
     }
   }
 
+  // Handle notification
   const handleNotification = () => {
     setNotification("You have a new notification");
     setTimeout(() => {
       setNotification("");
     }, 2000);
+  }; 
+
+  // Update progress for a specific task
+  const updateProgress = (index, newProgress) => {
+    const updatedProgress = [...progress];
+    updatedProgress[index] = newProgress;
+    setProgress(updatedProgress);
+
+    // Update the graph data
+    const updatedLineChartData = {
+      ...lineChartData,
+      datasets: [
+        {
+          ...lineChartData.datasets[0],
+          data: updatedProgress, // Sync the graph data with the progress values
+        },
+      ],
+    };
+    setLineChartData(updatedLineChartData);
   };
 
   return (
@@ -115,11 +201,11 @@ const Home = () => {
             <h3>{tasks.length === 0 ? "First Task" : tasks[0]}</h3>
             <p>Designing</p>
             <div className="outter_progress">
-              <div className="inner_progess"></div>
+              <div className="inner_progess" style={{ width: `${progress[0]}%` }}></div>
             </div>
             <div className="progress_text">
               <span>Progress</span>
-              <span>90%</span>
+              <span>{progress[0]}%</span>
             </div>
             <div className="last_section">
               <span className="Image_span">
@@ -135,11 +221,11 @@ const Home = () => {
             <h3>{tasks.length === 0 ? "Second Task" : tasks[1]}</h3>
             <p>Shopping</p>
             <div className="outter_progress">
-              <div className="inner_progess inner_progess_two"></div>
+              <div className="inner_progess inner_progess_two" style={{ width: `${progress[1]}%` }}></div>
             </div>
             <div className="progress_text">
               <span>Progress</span>
-              <span>33%</span>
+              <span>{progress[1]}%</span>
             </div>
             <div className="last_section">
               <span className="Image_span">
@@ -155,11 +241,11 @@ const Home = () => {
             <h3>{tasks.length === 0 ? "Third Task" : tasks[2]}</h3>
             <p>Designing</p>
             <div className="outter_progress">
-              <div className="inner_progess inner_progess_three"></div>
+              <div className="inner_progess inner_progess_three" style={{ width: `${progress[2]}%` }}></div>
             </div>
             <div className="progress_text progress_tex_three">
               <span>Progress</span>
-              <span>75%</span>
+              <span>{progress[2]}%</span>
             </div>
             <div className="last_section">
               <span className="Image_span">
@@ -195,6 +281,13 @@ const Home = () => {
                   <button className="delete_btn" onClick={() => deleteTask(index)}>Delete</button>
                   <button className="move_btn" onClick={() => moveTaskUp(index)}>👆</button>
                   <button className="move_btn" onClick={() => moveTaskDown(index)}>👇</button>
+                  <input
+                    type="number"
+                    value={progress[index]}
+                    onChange={(e) => updateProgress(index, parseInt(e.target.value))}
+                    min="0"
+                    max="100"
+                  />
                 </li>
               ))}
             </ol>
