@@ -141,9 +141,11 @@ const Home = () => {
 
   // Handle notification
   const handleNotification = () => {
-    setNotification("You have a new notification");
+    setNotification("lorem");
+    console.log("Clicked");
+    
     setTimeout(() => {
-      setNotification("");
+      setNotification(""); // Clear notification after 2 seconds
     }, 2000);
   };
 

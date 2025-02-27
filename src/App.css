@@ -32,33 +32,41 @@ ul{
 }
 .first_img{
   position: absolute;
+  cursor: pointer;
   top: 40px;
   left: 33px;
+  border: none;
+  background: transparent;
 }
 .second_img {
   position: absolute;
   top: 150px;
   left: 33px;
+  cursor: pointer;
 }
 .third_img{
   position: absolute;
   top: 314px;
   left: 47px;
+  cursor: pointer;
 }
 .fouth_img{
   position: absolute;
   top: 406px;
   left: 47px;
+  cursor: pointer;
 }
 .sixth_img{
   position: absolute;
   top: 498px;
   left: 47px;
+  cursor: pointer;
 }
 .seventh_img{
   position: absolute;
   top: 586px;
   left: 47px;
+  cursor: pointer;
 }
 .main_container{
   width: 60%;
@@ -681,6 +689,20 @@ input:focus {
 .calender img{
   width: 100%;
 }
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid black; /* Add a black border */
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 160px;
+  font-weight: bold;
+}
 @media (max-width: 1024px) {
   .aside_container {
       display: none;
@@ -766,7 +788,6 @@ input:focus {
     padding-bottom: 10px;
   }
 }
-
 .notification_container{
   width: fit-content;
   height: fit-content;
