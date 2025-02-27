@@ -39,6 +39,9 @@ const Home = () => {
   const [notification, setNotification] = useState("");
   const [progress, setProgress] = useState([90, 33, 75, 0, 0, 0, 0]); // Initial progress values for each task
   const [lineChartData, setLineChartData] = useState(initialLineChartData);
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [searchResults, setSearchResults] = useState([]); // State for search results
+  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
 
   // Handle input change for new task
   function handleInputChange(e) {
@@ -142,7 +145,7 @@ const Home = () => {
     setTimeout(() => {
       setNotification("");
     }, 2000);
-  }; 
+  };
 
   // Update progress for a specific task
   const updateProgress = (index, newProgress) => {
@@ -163,11 +166,32 @@ const Home = () => {
     setLineChartData(updatedLineChartData);
   };
 
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle search button click
+  const handleSearch = () => {
+    const results = tasks.filter((task) =>
+      task.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setSearchResults(results);
+    setShowPopup(true); // Show the popup
+  };
+
+  // Close the popup
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div className="General_container">
       <aside className="aside_container">
         <ul>
-          <button className="first_img" onClick={handleNotification}><img src="./first.png" alt="First" /></button>
+          <button className="first_img" onClick={handleNotification}>
+            <img src="./first.png" alt="First" />
+          </button>
           <li className="second_img"><img src="./second.png" alt="Second" /></li>
           <li className="third_img"><img src="./third.png" alt="Third" /></li>
           <li className="fouth_img"><img src="./fouth.png" alt="Fourth" /></li>
@@ -181,10 +205,36 @@ const Home = () => {
         </div>
         <div className="Search_btn">
           <div className="search_wrap">
-            <input type="text" placeholder="Search" />
-            <img src="search.png" alt="Search button" className="search_btn" />
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <button className="search_btn" onClick={handleSearch}>
+              <img src="search.png" alt="Search button" />
+            </button>
           </div>
         </div>
+        {/* Popup for search results */}
+        {showPopup && (
+          <div className="popup">
+            <div className="popup_content">
+              <button className="close_btn" onClick={closePopup}>
+                &times;
+              </button>
+              {searchResults.length > 0 ? (
+                <ul>
+                  {searchResults.map((task, index) => (
+                    <li key={index}>{task}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No such task found.</p>
+              )}
+            </div>
+          </div>
+        )}
         <div className="today_task_container">
           <div className="today_task_content">
             <h1>Today Task</h1>
