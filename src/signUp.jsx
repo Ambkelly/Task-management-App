@@ -1,25 +1,58 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import './signIn.css';
+import { auth, Provider } from './firebase';
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
 const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    alert('SignUp form submitted!');
-    navigate('/home'); // Navigate to the Home page after form submission
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredentials.user;
+      console.log("User created:", user);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        alert('The email address is already in use by another account.');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('The email address is not valid.');
+      } else if (error.code === 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        alert('An error occurred. Please try again.');
+      }
+    }
   };
 
-  const handleGoogleSignup = () => {
-    alert('Google Signup clicked!');
-    navigate('/home'); // Navigate to the Home page after Google signup
+  const handleGoogleSignup = async () => {
+    try{
+      await signInWithPopup(auth, Provider)
+    } catch(error) {
+      console.log(error)
+    }
   };
 
   const handleFacebookSignup = () => {
     alert('Facebook Signup clicked!');
-    navigate('/home'); // Navigate to the Home page after Facebook signup
+    navigate('/home');
   };
 
   return (
@@ -35,15 +68,22 @@ const SignUp = () => {
             </div>
             <div className="input-field">
               <label htmlFor="firstname">First Name</label>
-              <input type="text" id="firstname" placeholder="Your Username" required />
+              <input type="text" id="firstname" placeholder="Your First Name" required />
             </div>
             <div className="input-field">
               <label htmlFor="lastname">Last Name</label>
-              <input type="text" id="firstname" placeholder="Your Username" required />
+              <input type="text" id="lastname" placeholder="Your Last Name" required />
             </div>
             <div className="input-field">
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" placeholder="Example@email.com" required />
+              <input
+                type="email"
+                id="email"
+                placeholder="Example@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="input-field">
               <label htmlFor="password">Password</label>
@@ -52,6 +92,8 @@ const SignUp = () => {
                   type={passwordVisible ? 'text' : 'password'}
                   id="password"
                   placeholder="At least 8 characters"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <button
@@ -64,12 +106,14 @@ const SignUp = () => {
               </div>
             </div>
             <div className="input-field">
-              <label htmlFor="password">Confirm Password</label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="password-container">
                 <input
                   type={passwordVisible ? 'text' : 'password'}
-                  id="password"
+                  id="confirmPassword"
                   placeholder="At least 8 characters"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
                 <button
@@ -93,7 +137,7 @@ const SignUp = () => {
                 Sign up with Facebook
               </button>
             </div>
-            <p className="sign-up">Already have an account? <Link to="/">Sign Up</Link></p>
+            <p className="sign-up">Already have an account? <Link to="/">Sign In</Link></p>
           </form>
         </div>
       </div>

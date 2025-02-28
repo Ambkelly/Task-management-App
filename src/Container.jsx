@@ -1,6 +1,7 @@
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
 import { Chart as ChartJs, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 // Register Chart.js components
 ChartJs.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -34,6 +35,7 @@ const options = {
 };
 
 const Home = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [notification, setNotification] = useState("");
@@ -42,6 +44,11 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const [searchResults, setSearchResults] = useState([]); // State for search results
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
+
+  // Handle logout
+  const handleLogout = () => {
+    navigate("/signUp"); // Redirect to the login page
+  };
 
   // Handle input change for new task
   function handleInputChange(e) {
@@ -383,6 +390,10 @@ const Home = () => {
         <div className="calender">
           <img src="Calendar.png" alt="Calendar" />
         </div>
+        {/* Add Logout Button */}
+        <button className="logout_btn" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );

@@ -699,6 +699,20 @@ input:focus {
 .calender img{
   width: 100%;
 }
+/* Logout CSS */
+.logout_btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.logout_btn:hover {
+  background-color: #ff1a1a;
+}
 @media (max-width: 1024px) {
   .aside_container {
       display: none;
